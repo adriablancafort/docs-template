@@ -6,12 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": true,
-    "includes": [
-      "**",
-      "!node_modules",
-      "!.source"
-    ]
+    "includes": ["**", "!!**/dist", "!!**/node_modules", "!**/*.gen.ts"]
   },
   "formatter": {
     "enabled": true,

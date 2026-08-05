@@ -1,8 +1,8 @@
-import react from '@vitejs/plugin-react';
-import { tanstackStart } from '@tanstack/react-start/plugin/vite';
-import { defineConfig } from 'vite';
-import tailwindcss from '@tailwindcss/vite';
-import { fumadocsMdx } from 'fumadocs-mdx/vite';
+import react from "@vitejs/plugin-react";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+import { fumadocsMdx } from "fumadocs-mdx/vite";
 
 export default defineConfig({
   server: {
@@ -19,16 +19,16 @@ export default defineConfig({
 
       pages: [
         {
-          path: '/docs',
+          path: "/docs",
         },
         {
-          path: '/api/search',
+          path: "/api/search",
         },
         {
-          path: 'llms-full.txt',
+          path: "llms-full.txt",
         },
         {
-          path: 'llms.txt',
+          path: "llms.txt",
         },
       ],
     }),
@@ -36,14 +36,14 @@ export default defineConfig({
   ],
   optimizeDeps: {
     include: [
-      'use-sync-external-store/shim',
-      'use-sync-external-store/shim/with-selector',
+      "use-sync-external-store/shim",
+      "use-sync-external-store/shim/with-selector",
     ],
   },
   resolve: {
     tsconfigPaths: true,
     alias: {
-      tslib: 'tslib/tslib.es6.js',
+      tslib: "tslib/tslib.es6.js",
     },
   },
 });

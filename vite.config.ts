@@ -3,7 +3,6 @@ import { tanstackStart } from '@tanstack/react-start/plugin/vite';
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import { fumadocsMdx } from 'fumadocs-mdx/vite';
-import { nitro } from 'nitro/vite';
 
 export default defineConfig({
   server: {
@@ -13,12 +12,9 @@ export default defineConfig({
     fumadocsMdx(),
     tailwindcss(),
     tanstackStart({
-      spa: {
+      prerender: {
         enabled: true,
-        prerender: {
-          enabled: true,
-          crawlLinks: true,
-        },
+        crawlLinks: true,
       },
 
       pages: [
@@ -37,9 +33,13 @@ export default defineConfig({
       ],
     }),
     react(),
-    // please see https://tanstack.com/start/latest/docs/framework/react/guide/hosting#nitro for guides on hosting
-    nitro(),
   ],
+  optimizeDeps: {
+    include: [
+      'use-sync-external-store/shim',
+      'use-sync-external-store/shim/with-selector',
+    ],
+  },
   resolve: {
     tsconfigPaths: true,
     alias: {

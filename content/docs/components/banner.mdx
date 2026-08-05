@@ -1,0 +1,22 @@
+---
+title: Banner
+description: Add a banner to your site
+---
+
+Banners are usually placed in the root layout. This page shows inline examples with layout changes disabled.
+
+<Banner changeLayout={false}>Hello World</Banner>
+
+### Rainbow variant
+
+<Banner changeLayout={false} variant="rainbow">
+  New release is available
+</Banner>
+
+### Dismissible
+
+Give the banner an `id` so users can close it and the state persists.
+
+<Banner changeLayout={false} id="docs-banner-example">
+  This banner can be dismissed
+</Banner>

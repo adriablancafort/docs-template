@@ -1,0 +1,27 @@
+---
+title: Code Block
+description: Display Shiki highlighted code blocks
+---
+
+Code blocks are rendered through the default MDX `pre` component.
+
+```ts title="hello.ts"
+export function greet(name: string) {
+  console.log(`Hello, ${name}!`);
+}
+```
+
+```js title="config.js"
+/** @type {import('next').NextConfig} */
+const config = {
+  reactStrictMode: true,
+};
+
+export default config;
+```
+
+### Package managers
+
+```npm
+npm i fumadocs-core fumadocs-ui
+```

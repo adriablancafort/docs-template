@@ -1,0 +1,26 @@
+---
+title: Tabs
+description: Tabbed content with shared and persistent values
+---
+
+A tabs component with persistent and shared value support.
+
+<Tabs items={['Javascript', 'Rust']}>
+  <Tab value="Javascript">Javascript is weird</Tab>
+  <Tab value="Rust">Rust is fast</Tab>
+</Tabs>
+
+### Shared value
+
+<Tabs groupId="language" items={['Javascript', 'Rust']}>
+  <Tab value="Javascript">Shared Javascript tab</Tab>
+  <Tab value="Rust">Shared Rust tab</Tab>
+</Tabs>
+
+### Persistent
+
+<Tabs groupId="package-manager" items={['npm', 'pnpm', 'yarn']} persist>
+  <Tab value="npm">`npm install fumadocs-ui`</Tab>
+  <Tab value="pnpm">`pnpm add fumadocs-ui`</Tab>
+  <Tab value="yarn">`yarn add fumadocs-ui`</Tab>
+</Tabs>

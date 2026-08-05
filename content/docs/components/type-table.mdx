@@ -1,0 +1,27 @@
+---
+title: Type Table
+description: A table for documenting types
+---
+
+Document object fields with `TypeTable`.
+
+<TypeTable
+  type={{
+    percentage: {
+      description:
+        'The percentage of scroll position to display the roll button',
+      type: 'number',
+      default: '0.2',
+    },
+    enabled: {
+      description: 'Whether the feature is enabled',
+      type: 'boolean',
+      default: 'true',
+      required: true,
+    },
+    label: {
+      description: 'Optional label text',
+      type: 'string',
+    },
+  }}
+/>

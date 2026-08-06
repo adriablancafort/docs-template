@@ -1,6 +1,6 @@
 export const appName = "Docs Template";
-export const docsRoute = "/docs";
-export const docsImageRoute = "/og/docs";
+export const docsRoute = "/";
+export const docsImageRoute = "/og";
 
 // fill this with your actual GitHub info, for example:
 export const gitConfig = {

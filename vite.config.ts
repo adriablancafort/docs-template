@@ -3,8 +3,7 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import { fumadocsMdx } from "fumadocs-mdx/vite";
-
-const siteUrl = "https://fumadocs-template.pages.dev";
+import { siteUrl } from "./src/lib/shared.ts";
 
 export default defineConfig({
   server: {

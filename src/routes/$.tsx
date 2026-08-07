@@ -11,7 +11,12 @@ import {
   ViewOptionsPopover,
 } from "fumadocs-ui/layouts/docs/page";
 import { baseOptions } from "@/lib/layout.shared";
-import { encodeMarkdownUrl, gitConfig } from "@/lib/shared";
+import {
+  absoluteUrl,
+  appName,
+  encodeMarkdownUrl,
+  gitConfig,
+} from "@/lib/shared";
 import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
 import { useFumadocsLoader } from "fumadocs-core/source/client";
 import { Suspense, use } from "react";
@@ -24,6 +29,18 @@ export const Route = createFileRoute("/$")({
     const data = await loader({ data: slugs });
     await docs.getPage(data.path)?.preload();
     return data;
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+
+    const title = `${loaderData.title} - ${appName}`;
+    const description = loaderData.description;
+    const pageUrl = absoluteUrl(loaderData.url);
+
+    return {
+      meta: [{ title }, { name: "description", content: description }],
+      links: [{ rel: "canonical", href: pageUrl }],
+    };
   },
 });
 
@@ -38,6 +55,9 @@ const loader = createServerFn({
 
     return {
       path: page.path,
+      url: page.url,
+      title: page.data.title,
+      description: page.data.description ?? "",
       markdownUrl: encodeMarkdownUrl(page.slugs, page.locale),
       pageTree: await source.serializePageTree(source.getPageTree()),
     };

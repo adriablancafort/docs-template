@@ -1,4 +1,5 @@
 export const appName = "Docs Template";
+export const siteUrl = "https://fumadocs-template.pages.dev";
 export const docsRoute = "/";
 export const docsImageRoute = "/og";
 
@@ -8,6 +9,10 @@ export const gitConfig = {
   repo: "docs-template",
   branch: "main",
 };
+
+export function absoluteUrl(path: string) {
+  return new URL(path, siteUrl).href;
+}
 
 export function encodeMarkdownUrl(slugs: string[], locale?: string) {
   const segments = [...slugs];

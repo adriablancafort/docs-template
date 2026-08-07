@@ -7,6 +7,7 @@ import {
 import appCss from "@/styles/app.css?url";
 import { RootProvider } from "fumadocs-ui/provider/tanstack";
 import SearchDialog from "@/components/search";
+import { appName } from "@/lib/shared";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -19,7 +20,7 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "Docs Template",
+        title: appName,
       },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
@@ -29,7 +30,7 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <html suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>

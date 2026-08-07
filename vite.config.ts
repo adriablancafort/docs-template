@@ -4,6 +4,8 @@ import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import { fumadocsMdx } from "fumadocs-mdx/vite";
 
+const siteUrl = "https://fumadocs-template.pages.dev";
+
 export default defineConfig({
   server: {
     port: 3000,
@@ -15,6 +17,15 @@ export default defineConfig({
       prerender: {
         enabled: true,
         crawlLinks: true,
+        onSuccess: ({ page }) => {
+          if (page.path.endsWith(".md")) {
+            return { sitemap: { exclude: true } };
+          }
+        },
+      },
+      sitemap: {
+        enabled: true,
+        host: siteUrl,
       },
 
       pages: [
@@ -23,12 +34,15 @@ export default defineConfig({
         },
         {
           path: "/api/search",
+          sitemap: { exclude: true },
         },
         {
           path: "llms-full.txt",
+          sitemap: { exclude: true },
         },
         {
           path: "llms.txt",
+          sitemap: { exclude: true },
         },
       ],
     }),

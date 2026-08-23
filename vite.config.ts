@@ -43,6 +43,10 @@ export default defineConfig({
           path: "llms.txt",
           sitemap: { exclude: true },
         },
+        {
+          path: "/robots.txt",
+          sitemap: { exclude: true },
+        },
       ],
     }),
     react(),

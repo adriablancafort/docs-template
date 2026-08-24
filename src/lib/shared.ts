@@ -1,7 +1,9 @@
 export const appName = "Docs Template";
 export const siteUrl = "https://fumadocs-template.pages.dev";
+export const siteDescription = "Documentation built with Fumadocs.";
 export const docsRoute = "/";
 
+export const logoPath = "/favicon.svg";
 export const ogImagePath = "/og.png";
 export const ogImageWidth = 1200;
 export const ogImageHeight = 630;

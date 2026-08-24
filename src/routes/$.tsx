@@ -16,6 +16,7 @@ import {
   appName,
   encodeMarkdownUrl,
   gitConfig,
+  siteUrl,
 } from "@/lib/shared";
 import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
 import { useFumadocsLoader } from "fumadocs-core/source/client";
@@ -33,7 +34,8 @@ export const Route = createFileRoute("/$")({
   head: ({ loaderData }) => {
     if (!loaderData) return {};
 
-    const title = `${loaderData.title} - ${appName}`;
+    const pageTitle = loaderData.title;
+    const title = `${pageTitle} - ${appName}`;
     const description = loaderData.description;
     const pageUrl = absoluteUrl(loaderData.url);
 
@@ -44,10 +46,10 @@ export const Route = createFileRoute("/$")({
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:url", content: pageUrl },
-        { property: "og:image:alt", content: loaderData.title },
+        { property: "og:image:alt", content: title },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
-        { name: "twitter:image:alt", content: loaderData.title },
+        { name: "twitter:image:alt", content: title },
       ],
       links: [
         { rel: "canonical", href: pageUrl },
@@ -55,6 +57,43 @@ export const Route = createFileRoute("/$")({
           rel: "alternate",
           type: "text/markdown",
           href: absoluteUrl(loaderData.markdownUrl),
+        },
+      ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "@id": `${pageUrl}#webpage`,
+                url: pageUrl,
+                name: pageTitle,
+                description,
+                isPartOf: {
+                  "@id": `${siteUrl}/#website`,
+                },
+              },
+              {
+                "@type": ["Article", "TechArticle"],
+                "@id": `${pageUrl}#article`,
+                headline: pageTitle,
+                name: pageTitle,
+                description,
+                url: pageUrl,
+                mainEntityOfPage: {
+                  "@id": `${pageUrl}#webpage`,
+                },
+                publisher: {
+                  "@id": `${siteUrl}/#organization`,
+                },
+                isPartOf: {
+                  "@id": `${siteUrl}/#website`,
+                },
+              },
+            ],
+          }),
         },
       ],
     };

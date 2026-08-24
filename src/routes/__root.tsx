@@ -10,16 +10,20 @@ import SearchDialog from "@/components/search";
 import {
   absoluteUrl,
   appName,
+  gitConfig,
+  logoPath,
   ogImageHeight,
   ogImagePath,
   ogImageWidth,
   ogLocale,
+  siteDescription,
   siteUrl,
 } from "@/lib/shared";
 
 const title = appName;
-const description = "Documentation built with Fumadocs.";
+const description = siteDescription;
 const ogImage = absoluteUrl(ogImagePath);
+const logo = absoluteUrl(logoPath);
 
 export const Route = createRootRoute({
   head: () => ({
@@ -53,6 +57,42 @@ export const Route = createRootRoute({
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": `${siteUrl}/#organization`,
+              name: appName,
+              url: siteUrl,
+              logo: {
+                "@type": "ImageObject",
+                url: logo,
+              },
+              image: ogImage,
+              description,
+              sameAs: [
+                `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
+              ],
+            },
+            {
+              "@type": "WebSite",
+              "@id": `${siteUrl}/#website`,
+              url: siteUrl,
+              name: appName,
+              description,
+              publisher: {
+                "@id": `${siteUrl}/#organization`,
+              },
+              inLanguage: "en-US",
+            },
+          ],
+        }),
+      },
     ],
   }),
   component: RootComponent,

@@ -38,8 +38,25 @@ export const Route = createFileRoute("/$")({
     const pageUrl = absoluteUrl(loaderData.url);
 
     return {
-      meta: [{ title }, { name: "description", content: description }],
-      links: [{ rel: "canonical", href: pageUrl }],
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:url", content: pageUrl },
+        { property: "og:image:alt", content: loaderData.title },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image:alt", content: loaderData.title },
+      ],
+      links: [
+        { rel: "canonical", href: pageUrl },
+        {
+          rel: "alternate",
+          type: "text/markdown",
+          href: absoluteUrl(loaderData.markdownUrl),
+        },
+      ],
     };
   },
 });
@@ -57,7 +74,7 @@ const loader = createServerFn({
       path: page.path,
       url: page.url,
       title: page.data.title,
-      description: page.data.description ?? "",
+      description: page.data.description!,
       markdownUrl: encodeMarkdownUrl(page.slugs, page.locale),
       pageTree: await source.serializePageTree(source.getPageTree()),
     };

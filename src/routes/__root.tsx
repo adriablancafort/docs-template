@@ -7,21 +7,48 @@ import {
 import appCss from "@/styles/app.css?url";
 import { RootProvider } from "fumadocs-ui/provider/tanstack";
 import SearchDialog from "@/components/search";
-import { appName } from "@/lib/shared";
+import {
+  absoluteUrl,
+  appName,
+  ogImageHeight,
+  ogImagePath,
+  ogImageWidth,
+  ogLocale,
+  siteUrl,
+} from "@/lib/shared";
+
+const title = appName;
+const description = "Documentation built with Fumadocs.";
+const ogImage = absoluteUrl(ogImagePath);
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      {
-        charSet: "utf-8",
-      },
+      { charSet: "utf-8" },
       {
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      {
-        title: appName,
-      },
+      { title },
+      { name: "description", content: description },
+      { name: "robots", content: "index, follow" },
+      { property: "og:site_name", content: appName },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:url", content: siteUrl },
+      { property: "og:locale", content: ogLocale },
+      { property: "og:image", content: ogImage },
+      { property: "og:image:width", content: String(ogImageWidth) },
+      { property: "og:image:height", content: String(ogImageHeight) },
+      { property: "og:image:alt", content: appName },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: ogImage },
+      { name: "twitter:image:alt", content: appName },
+      { name: "twitter:image:width", content: String(ogImageWidth) },
+      { name: "twitter:image:height", content: String(ogImageHeight) },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

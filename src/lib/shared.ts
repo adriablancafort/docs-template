@@ -1,7 +1,11 @@
 export const appName = "Docs Template";
 export const siteUrl = "https://fumadocs-template.pages.dev";
 export const docsRoute = "/";
-export const docsImageRoute = "/og";
+
+export const ogImagePath = "/og.png";
+export const ogImageWidth = 1200;
+export const ogImageHeight = 630;
+export const ogLocale = "en_US";
 
 // fill this with your actual GitHub info, for example:
 export const gitConfig = {

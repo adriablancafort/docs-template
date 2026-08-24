@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { fumadocsMdx } from "fumadocs-mdx/vite";
 import { siteUrl } from "./src/lib/shared.ts";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   server: {
     port: 3000,
   },
@@ -22,6 +22,12 @@ export default defineConfig({
           }
         },
       },
+      spa: {
+        enabled: command === "build",
+        maskPath: "/404",
+        prerender: { outputPath: "/404" },
+      },
+
       sitemap: {
         enabled: true,
         host: siteUrl,
@@ -63,4 +69,4 @@ export default defineConfig({
       tslib: "tslib/tslib.es6.js",
     },
   },
-});
+}));

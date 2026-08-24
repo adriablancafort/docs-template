@@ -7,6 +7,7 @@ import {
 import appCss from "@/styles/app.css?url";
 import { RootProvider } from "fumadocs-ui/provider/tanstack";
 import SearchDialog from "@/components/search";
+import { NotFound } from "@/components/not-found";
 import {
   absoluteUrl,
   appName,
@@ -96,6 +97,7 @@ export const Route = createRootRoute({
     ],
   }),
   component: RootComponent,
+  notFoundComponent: NotFound,
 });
 
 function RootComponent() {

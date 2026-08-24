@@ -27,9 +27,14 @@ export const Route = createFileRoute("/$")({
   component: Page,
   loader: async ({ params }) => {
     const slugs = params._splat?.split("/") ?? [];
-    const data = await loader({ data: slugs });
-    await docs.getPage(data.path)?.preload();
-    return data;
+
+    try {
+      const data = await loader({ data: slugs });
+      await docs.getPage(data.path)?.preload();
+      return data;
+    } catch {
+      throw notFound();
+    }
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
